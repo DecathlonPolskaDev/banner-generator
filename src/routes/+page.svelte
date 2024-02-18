@@ -1,2 +1,15 @@
-<h1 class="text-2xl mb-5">Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import View from '$lib/atoms/View.svelte';
+	import CodeEditorList from '$lib/templates/CodeEditorList.svelte';
+	import StrapiCode from '$lib/atoms/StrapiCode.svelte';
+</script>
+
+<div class="flex h-screen">
+	<div class="flex flex-1 items-center justify-center bg-gray-300">
+		<View />
+	</div>
+	<div class="relative w-1/3 overflow-y-scroll border-l-2 border-l-black bg-gray-200">
+		<CodeEditorList />
+		<StrapiCode />
+	</div>
+</div>
