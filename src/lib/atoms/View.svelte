@@ -1,11 +1,25 @@
 <script lang="ts">
-	import Fa from 'svelte-fa';
-	import { faXmark } from '@fortawesome/free-solid-svg-icons';
 	import codeStore from '$lib/atoms/codeStore.svelte';
 	import RotateDeviceIcon from './RotateDeviceIcon.svelte';
 
 	let sizes = $state([375, 667]);
 	let selectedDevice = $state('iphone-se');
+	let preview: HTMLIFrameElement | undefined = $state();
+
+	$effect(() => {
+		if (codeStore.html) {
+			preview?.contentWindow?.postMessage(
+				{
+					type: 'update',
+					html: codeStore.html,
+					css: codeStore.css,
+					javascript: codeStore.javascript,
+					closeButtonColor: codeStore.closeButtonColor
+				},
+				'*'
+			);
+		}
+	});
 
 	function deviceChange(event: Event) {
 		const select = event.target as HTMLSelectElement;
@@ -25,20 +39,7 @@
 			selectedDevice = 'ipad-air';
 		}
 	}
-
-	const swapSizes = () => {
-		sizes.reverse();
-	};
 </script>
-
-<svelte:head>
-	{#if codeStore.css}
-		{@html `<` + `style id="DUPA">${codeStore.css}</style>`}
-	{/if}
-	{#if codeStore.javascript}
-		{@html `<` + `script>${codeStore.javascript}</` + `script>`}
-	{/if}
-</svelte:head>
 
 <div>
 	<div class="mb-3 flex items-center justify-center gap-3">
@@ -56,18 +57,10 @@
 		<button
 			type="button"
 			class="flex h-9 w-9 items-center justify-center rounded bg-white"
-			on:click={swapSizes}
+			on:click={sizes.reverse}
 		>
 			<RotateDeviceIcon />
 		</button>
 	</div>
-	<div
-		style="width: {sizes[0]}px; height: {sizes[1]}px; container-type: inline-size"
-		class="relative overflow-clip bg-white"
-	>
-		<div class="absolute right-0 top-0 z-10 p-5">
-			<Fa icon={faXmark} style="color: {codeStore.closeButtonColor}" size="1.2x" />
-		</div>
-		{@html codeStore.html}
-	</div>
+	<iframe width={sizes[0]} height={sizes[1]} src="/preview" title="preview" bind:this={preview} />
 </div>

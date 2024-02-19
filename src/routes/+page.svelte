@@ -2,6 +2,7 @@
 	import View from '$lib/atoms/View.svelte';
 	import CodeEditorList from '$lib/templates/CodeEditorList.svelte';
 	import StrapiCode from '$lib/atoms/StrapiCode.svelte';
+	import codeStore from '$lib/atoms/codeStore.svelte';
 </script>
 
 <div class="flex h-screen">
