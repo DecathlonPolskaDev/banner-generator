@@ -28,15 +28,3 @@
 		</div>
 	</div>
 </li>
-
-<style>
-	.dropdown {
-		display: grid;
-		grid-template-rows: 0fr;
-		transition: grid-template-rows 200ms;
-	}
-
-	.dropdown.isOpen {
-		grid-template-rows: 1fr;
-	}
-</style>
