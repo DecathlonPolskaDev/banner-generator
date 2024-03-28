@@ -4,6 +4,8 @@
 	import StrapiCode from '$lib/atoms/StrapiCode.svelte';
 	import ArchiveBannerList from '$lib/templates/ArchiveBannerList/ArchiveBannerList.svelte';
 	import SaveButtons from '$lib/templates/SaveButtons.svelte';
+
+	const { data } = $props();
 </script>
 
 <svelte:head>
@@ -18,6 +20,6 @@
 		<CodeEditorList />
 		<StrapiCode />
 		<SaveButtons />
-		<ArchiveBannerList />
+		<ArchiveBannerList values={data.archiveBannerKeys} />
 	</div>
 </div>

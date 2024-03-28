@@ -13,6 +13,7 @@
 		value = `{
   "css": "${codeStore.css.replaceAll(/\n\ */gi, ' ').replaceAll('"', '\\"')}",
   "html": "${codeStore.html.replaceAll(/\n\ */gi, ' ').replaceAll('"', '\\"')}",
+	"javascript": "${codeStore.javascript.replaceAll(/\n\ */gi, ' ').replaceAll('"', '\\"')}",
   "bannerId": "${codeStore.bannerId}",
   "closeButtonColor": "${codeStore.closeButtonColor}"
 }`;

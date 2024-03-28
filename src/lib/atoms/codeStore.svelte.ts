@@ -1,6 +1,8 @@
+import { initialCSS, initialHTML } from './initialCode.js';
+
 function createCodeStore() {
-	let html = $state('');
-	let css = $state('');
+	let html = $state(initialHTML);
+	let css = $state(initialCSS);
 	let javascript = $state('');
 	let bannerId = $state('');
 	let closeButtonColor = $state('#ffffff');

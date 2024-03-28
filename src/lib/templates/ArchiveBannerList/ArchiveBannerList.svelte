@@ -4,6 +4,8 @@
 	import ArchiveBannerItem from './ArchiveBannerItem.svelte';
 	import { slide } from 'svelte/transition';
 
+	const { values }: { values: string[] } = $props();
+
 	let isOpen = $state(false);
 </script>
 
@@ -16,42 +18,9 @@
 	</h2>
 	{#if isOpen}
 		<ul transition:slide>
-			<ArchiveBannerItem bannerId="app-deals" />
-			<ArchiveBannerItem bannerId="app-days" />
-			<ArchiveBannerItem bannerId="first" />
-			<ArchiveBannerItem bannerId="app-deals" />
-			<ArchiveBannerItem bannerId="app-days" />
-			<ArchiveBannerItem bannerId="first" />
-			<ArchiveBannerItem bannerId="app-deals" />
-			<ArchiveBannerItem bannerId="app-days" />
-			<ArchiveBannerItem bannerId="first" />
-			<ArchiveBannerItem bannerId="app-deals" />
-			<ArchiveBannerItem bannerId="app-days" />
-			<ArchiveBannerItem bannerId="first" />
-			<ArchiveBannerItem bannerId="app-deals" />
-			<ArchiveBannerItem bannerId="app-days" />
-			<ArchiveBannerItem bannerId="first" />
-			<ArchiveBannerItem bannerId="app-deals" />
-			<ArchiveBannerItem bannerId="app-days" />
-			<ArchiveBannerItem bannerId="first" />
-			<ArchiveBannerItem bannerId="app-deals" />
-			<ArchiveBannerItem bannerId="app-days" />
-			<ArchiveBannerItem bannerId="first" />
-			<ArchiveBannerItem bannerId="app-deals" />
-			<ArchiveBannerItem bannerId="app-days" />
-			<ArchiveBannerItem bannerId="first" />
-			<ArchiveBannerItem bannerId="app-deals" />
-			<ArchiveBannerItem bannerId="app-days" />
-			<ArchiveBannerItem bannerId="first" />
-			<ArchiveBannerItem bannerId="app-deals" />
-			<ArchiveBannerItem bannerId="app-days" />
-			<ArchiveBannerItem bannerId="first" />
-			<ArchiveBannerItem bannerId="app-deals" />
-			<ArchiveBannerItem bannerId="app-days" />
-			<ArchiveBannerItem bannerId="first" />
-			<ArchiveBannerItem bannerId="app-deals" />
-			<ArchiveBannerItem bannerId="app-days" />
-			<ArchiveBannerItem bannerId="first" />
+			{#each values as value}
+				<ArchiveBannerItem bannerId={value} />
+			{/each}
 		</ul>
 	{/if}
 </div>

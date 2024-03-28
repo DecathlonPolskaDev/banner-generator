@@ -7,7 +7,7 @@
 		children,
 		noBorder = false,
 		title
-	} = $props<{ children: Snippet; noBorder?: boolean; title: string }>();
+	}: { children: Snippet; noBorder?: boolean; title: string } = $props();
 	let isOpen = $state(false);
 </script>
 
