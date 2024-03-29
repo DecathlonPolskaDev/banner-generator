@@ -1,25 +1,46 @@
 <script lang="ts">
+	import { invalidateAll } from '$app/navigation';
 	import Fa from 'svelte-fa';
-	import { faFloppyDisk, faPlus } from '@fortawesome/free-solid-svg-icons';
+	import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+	import codeStore from '$lib/atoms/codeStore.svelte';
+
+	const { values }: { values: string[] } = $props();
+
+	let isSaved = $derived(values.includes(codeStore.bannerId));
+
+	async function saveBanner() {
+		const response = await fetch(`/api/${codeStore.bannerId}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				html: codeStore.html,
+				css: codeStore.css,
+				javascript: codeStore.javascript,
+				closeButtonColor: codeStore.closeButtonColor
+			})
+		});
+		const data = await response.json();
+
+		if (data) {
+			invalidateAll();
+		}
+	}
 </script>
 
-<ul class="mx-5 flex gap-5">
-	<li class="flex-1">
-		<button
-			type="button"
-			class="flex w-full items-center justify-center rounded bg-gray-300 p-2 transition-colors hover:bg-black hover:text-white"
-		>
-			<Fa icon={faPlus} class="mr-3" />
-			Add new
-		</button>
-	</li>
-	<li class="flex-1">
-		<button
-			type="button"
-			class="flex w-full items-center justify-center rounded bg-green-600 p-2 text-white transition-colors hover:bg-black"
-		>
-			<Fa icon={faFloppyDisk} class="mr-3" />
+<div class="px-4">
+	<button
+		type="button"
+		class="flex w-full items-center justify-center rounded p-2 text-white transition-colors enabled:bg-green-600 enabled:hover:bg-black disabled:bg-gray-400"
+		disabled={codeStore.bannerId === ''}
+		on:click={saveBanner}
+	>
+		<Fa icon={faFloppyDisk} class="mr-3" />
+		{#if isSaved}
+			Update
+		{:else}
 			Save
-		</button>
-	</li>
-</ul>
+		{/if}
+	</button>
+</div>

@@ -19,7 +19,7 @@
 	<div class="relative w-1/3 overflow-y-scroll border-l-2 border-l-black bg-gray-200">
 		<CodeEditorList />
 		<StrapiCode />
-		<SaveButtons />
+		<SaveButtons values={data.archiveBannerKeys} />
 		<ArchiveBannerList values={data.archiveBannerKeys} />
 	</div>
 </div>

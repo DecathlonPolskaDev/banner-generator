@@ -18,7 +18,7 @@
 	</h2>
 	{#if isOpen}
 		<ul transition:slide>
-			{#each values as value}
+			{#each values as value (value)}
 				<ArchiveBannerItem bannerId={value} />
 			{/each}
 		</ul>

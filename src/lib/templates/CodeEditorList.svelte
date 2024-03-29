@@ -2,6 +2,12 @@
 	import CodeEditor from '$lib/atoms/CodeEditor.svelte';
 	import codeStore from '$lib/atoms/codeStore.svelte';
 	import CodeEditorItem from './CodeEditorItem.svelte';
+
+	function block(e: KeyboardEvent) {
+		if (!e.key.match(/[a-z-]/)) {
+			e.preventDefault();
+		}
+	}
 </script>
 
 <ul>
@@ -30,9 +36,10 @@
 		<input
 			type="text"
 			class="mx-4 mb-6 rounded p-2 focus:outline-none"
-			on:change={(e: Event) => {
-					codeStore.setBannerId((e.target as HTMLInputElement).value);
-				}}
+			on:input={(e: Event) => {
+				codeStore.setBannerId((e.target as HTMLInputElement).value);
+			}}
+			on:keypress={block}
 			value={codeStore.bannerId}
 		/>
 	</CodeEditorItem>

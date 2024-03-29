@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { onDestroy, onMount, untrack } from 'svelte';
 	import type * as Monaco from 'monaco-editor/esm/vs/editor/editor.api';
 	import codeStore from './codeStore.svelte';
 
@@ -58,9 +58,13 @@
 	});
 
 	$effect(() => {
-		if (editor && monaco) {
-			editor.setModel(monaco.editor.createModel(getCode(type), type));
-			editor!.getAction('editor.action.formatDocument')!.run();
+		if (codeStore.bannerId) {
+			untrack(() => {
+				if (editor && monaco) {
+					editor.setModel(monaco.editor.createModel(getCode(type), type));
+					editor!.getAction('editor.action.formatDocument')!.run();
+				}
+			});
 		}
 	});
 
