@@ -57,7 +57,7 @@
 		<button
 			type="button"
 			class="flex h-9 w-9 items-center justify-center rounded bg-white"
-			on:click={sizes.reverse}
+			on:click={() => sizes.reverse()}
 		>
 			<RotateDeviceIcon />
 		</button>
